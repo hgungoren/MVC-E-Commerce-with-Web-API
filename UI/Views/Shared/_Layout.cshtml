@@ -1,0 +1,215 @@
+﻿@{ var basket = Session["Basket"] as UI.Models.Basket.CartItem;
+    var user = Session["User"] as MODEL.Entities.AppUser;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Shopper</title>
+    <link href="~/Content/theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/theme/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/theme/css/price-range.css" rel="stylesheet">
+    <link href="~/Content/theme/css/animate.css" rel="stylesheet">
+    <link href="~/Content/theme/css/main.css" rel="stylesheet">
+    <link href="~/Content/theme/css/responsive.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="~/Content/theme/Content/theme/js/html5shiv.js"></script>
+    <script src="~/Content/theme/js/respond.min.js"></script>
+    <![endif]-->
+
+</head><!--/head-->
+
+<body>
+    <header id="header">
+        <!--header-->
+
+
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="@Url.Action("Index","Home")"><img src="~/Content/image/EvkurLogo.png" alt="" width="80" height="80" /></a>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="shop-menu pull-right">
+                            <ul class="nav navbar-nav">
+
+                                <li>
+                                    @if (basket != null)
+                                    {
+                                        <a class="nav-link" href="@Url.Action("Index","Basket")">Sepet <span class="badge badge-primary">@basket.MyBasket.Count</span></a> }
+                                    else
+                                    {
+                                        <a class="nav-link" href="#">Sepet</a>}
+
+
+
+                                    @*<a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>*@
+                                </li>
+
+
+                                <li>
+                                    @if (user != null)
+                                    {
+                                        <a class="nav-link"><img class="card-img-top" src="~/Content/user-image/@user.ImagePath" alt="" width="30" height="35" />@user.UserName</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Login","Home")"><i class="fa fa-lock"></i>Login</a>
+
+                                    }
+                                </li>
+
+
+
+
+                                @*<li>@Html.ActionLink("Giriş Yap", "Login", null, new { @class = "nav-link" })</li>*@
+                                <li class="nav-item">
+                                    @Html.ActionLink("Kayıt Ol", "Register", "Home", null, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("İletişim", "Index", "Blog", null, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Çıkış Yap", "LogOut", "Home", null, new { @class = "nav-link" })
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-middle-->
+
+        <div class="header-bottom">
+            <!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu pull-left">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <li><a href="@Url.Action("Index","Home")" class="active">Home</a></li>
+                                <li><a href="@Url.Action("Products","Home")" class="active">Products</a></li>
+                                <li><a href="@Url.Action("Index","Product")" class="active">Kusurlu Ürünler için Bize Ulaşın</a></li>
+                                <li><a href="@Url.Action("ReturnProduct","Product")" class="active">Mal İadeleri</a></li>
+                                <li><a href="@Url.Action("Index","Survey"@*, new {Area="Halklaİliskiler" }*@)" class="active">Anketimize Katılmak İster Misiniz?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="search_box pull-right">
+                            <input type="text" placeholder="Search" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-bottom-->
+
+    </header><!--/header-->
+
+    @RenderBody()
+
+
+
+
+    <footer class="header-bottom" id="footer">
+        <!--Footer-->
+        @*<div class="header-bottom">
+
+            </div>*@
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Service</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                
+                                <li><a href="@Url.Action("ContactUs","Home")">Contact Us</a></li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Policies</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Terms of Use</a></li>
+                                <li><a href="#">Privecy Policy</a></li>
+                                <li><a href="#">Refund Policy</a></li>
+                                <li><a href="#">Billing System</a></li>
+                                <li><a href="#">Ticket System</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>About Shopper</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Company Information</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Store Location</a></li>
+                                <li><a href="#">Affillate Program</a></li>
+                                <li><a href="#">Copyright</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-sm-offset-1">
+                        <div class="single-widget">
+                            <h2>About Shopper</h2>
+                            <form action="#" class="searchform">
+                                <input type="text" placeholder="Your email address" />
+                                <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
+                                <p>Get the most recent updates from <br />our site and be updated your self...</p>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2020 E-TİCARET Inc. All rights reserved.</p>
+                    <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                </div>
+            </div>
+        </div>
+
+    </footer><!--/Footer-->
+
+
+
+    <script src="~/Content/theme/js/jquery.js"></script>
+    <script src="~/Content/theme/js/bootstrap.min.js"></script>
+    <script src="~/Content/theme/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/theme/js/price-range.js"></script>
+    <script src="~/Content/theme/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/theme/js/main.js"></script>
+    @RenderSection("scripts", false)
+    @RenderSection("scp",false)
+</body>
+</html>

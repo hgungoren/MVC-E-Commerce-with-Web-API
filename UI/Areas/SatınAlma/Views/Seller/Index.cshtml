@@ -1,0 +1,44 @@
+﻿@model List<MODEL.Entities.Seller>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/SatınAlma/Views/Shared/_Layout.cshtml";
+}
+
+<form method="get">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Bayi Şehir</th>
+                            <th>Bayi Bölge</th>
+                            <th>Bayi Çalışan Sayısı</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CityName</td>
+                            <td>@item.District</td>
+                            @*<td>@item.em</td>*@
+                            <td>
+                                @Html.ActionLink("Bayi Satış Detay", "SellerProductDetail", new { id = item.ID }, new { @class = "btn btn-warning" })
+                            </td>
+
+                           
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+

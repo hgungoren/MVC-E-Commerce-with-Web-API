@@ -1,0 +1,197 @@
+﻿@model IEnumerable<MODEL.Entities.AppUser>
+@{
+Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Content/assets/js/jquery.min.js"></script>
+<link href="~/Content/assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<div class="col-12 col-lg-12 col-xl-12">
+
+    <div class="row mt-4">
+
+        <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <a href="@Url.Action("Register","Home", new {Area="Admin" })">
+                        <div class="media">
+                            <div class="media-body text-left">
+                                <h4 class="text-white">Kişi Ekleyin</h4>
+                                <span class="text-white">Kişi Eklemek için Tıklayın</span>
+                            </div>
+                            <div class="align-self-center"><span id="dash-chart-1"></span></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-left">
+                            <h4 class="text-white">@Model.Count()</h4>
+                            <span class="text-white">Toplam Kişi Sayısı</span>
+                        </div>
+                        <div class="align-self-center"><span id="dash-chart-2"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="card">
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="example" class="table table-hover" cellpadding="0" style="width:100%;">
+                    <thead>
+                        <tr class="bg-dark" style="color:white">
+                            @*<td>Profil Foto</td>*@
+                            <td>Kullanıcı Adı</td>
+                            <td>Ad</td>
+                            <td>Soyad</td>
+                            <td>Email</td>
+                            <td>Rolü</td>
+                            <td>Şifre</td>
+                            <th>Doğum Tarihi</th>
+                            <th>Adres</th>
+                            <th>Telefon</th>
+                            <td>Cinsiyet</td>
+                            <td>Eklenme Tarihi</td>
+                            <td>Ekleyen</td>
+                            <td>İşlemler</td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+
+                            @*@if (item.ImagePath != null)
+                            {
+                                <td>
+                                    <img src="@item.ImagePath" width="32" height="32" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <img src="~/Content/images/user-images/placeholder.png" width="32" height="32" />
+                                </td>
+                            }*@
+
+
+
+                            <td>@item.UserName</td>
+                            <td>@item.Name</td>
+                            <td>@item.LastName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Role</td>
+                            <td>@item.Password</td>
+                            <td>@item.BirthDate.ToShortDateString())</td>
+
+                            <td>@item.Address</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.Gender</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.CreatedBy</td>
+                            <td>
+                                <a class="btn btn-sm btn-dark text-white" href="@Url.Action("Edit","Home")/@item.ID"> <i>Edit</i></a>
+
+                                @Html.ActionLink("Delete", "UserDelete", new { id = item.ID }, new { @class = "btn btn-danger text-center" })
+
+
+                                <script>
+                                    $(document).ready(function () {
+                                        $("cart-delete").click(function () {
+                                            var uId = $(this).attr("name");
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "Home/UserDelete/",
+                                                data: { id: uId },
+                                                success: function myfunction() {
+                                                    alert("success")
+                                                },
+                                                error: function myfunction() {
+                                                    alert("error");
+                                                }
+                                            });
+                                        });
+                                    });
+                                </script>
+
+
+
+
+
+                                @*<a class="btn btn-sm btn-pinterest text-white" onclick="Delete(@item.ID)">
+                <i class="fa fa fa-trash-o text-white"></i>
+            </a>
+            <script>
+                function Delete(id) {
+                    var link = "/Person/Delete/" + id;
+                    jQuery("#modalLink").attr("href", link);
+                    jQuery("#deleteperson").modal()
+                }
+            </script>*@
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="~/Content/assets/plugins/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-datatable/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/Content/assets/plugins/bootstrap-datatable/js/dataTables.buttons.min.js"></script>
+
+
+<script type="text/javascript">
+    var jQueryCalis = $.noConflict(true);
+    (function ($) {
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "lengthMenu": [[50, 50, -1], [50, 50, "Tümü"]],
+                "ordering": true,
+                "caseInsensitive": false,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+                }
+            });
+            var table = $('#example').DataTable();
+            $('#example').show();
+        });
+    })(jQueryCalis);
+</script>
+
+@*<div class="modal fade" id="deleteperson">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kayıt Silme</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Kayıt silincektir emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Kapat</button>
+                    <a class="btn btn-danger" id="modalLink"><i class="fa fa-check-square-o"></i> Sil</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+

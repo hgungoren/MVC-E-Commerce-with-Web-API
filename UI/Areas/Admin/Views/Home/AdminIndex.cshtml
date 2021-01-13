@@ -1,0 +1,118 @@
+﻿@model MODEL.Entities.AppUser
+@{
+    Layout = null;
+}
+@*<script src="~/Content/assets/js/jquery.min.js"></script>
+    <link href="~/Content/assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />*@
+
+<html lang="en">
+<head>
+    <title>Bootstrap Card</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <h3><span>@Model.UserName Hoşgeldiniz! Lütfen kayıt esnasında belirtmiş olduğunuz maili kontrol edin.</span></h3>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-12 col-xl-12">
+
+        <div class="row mt-4">
+
+
+
+            <div class="col-12 col-lg-12 col-xl-12">
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <a href="@Url.Action("Index","Home", new {Area="Halklaİliskiler"})">
+                                <h5><span class="text-white">Halkla İlişkiler Departmanı</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <a href="@Url.Action("Index","Home", new {Area="SatınAlma"})">
+                                <h5><span class="text-white">Satın Alma Departmanı</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <a href="@Url.Action("Index","Home", new {Area="InsanKaynaklari"})">
+                                <h5><span class="text-white">İnsan Kaynakları Departmanı</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <a href="@Url.Action("Index","Home", new {Area="FinansBolumu"})">
+                                <h5><span class="text-white">Finans Departmanı</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            @*@Html.ActionLink("Ana Sayfa", "Index", "Home", new { Area = "" }, null)*@
+
+                            <a href="@Url.Action("Index","Home", new {Area=""})">
+
+                                <h5><span class="text-white">Sitenin Anasayfası'na Gidiş..</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <a href="@Url.Action("Register","Home", new {Area="Admin"})">
+                                <h5><span class="text-white">Yeni Yetkili Kaydı Oluşturma</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-columns">
+                    <div class="card bg-primary">
+                        <div class="card-body text-center">
+                            <a href="@Url.Action("Indexx","Home", new {Area="Admin"})">
+                                <h5><span class="text-white">Kayıt Listesi</span></h5>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,71 @@
+﻿@model MODEL.Entities.Product
+@{
+    ViewBag.Title = "UpdateProduct";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+}
+
+<form role="form" method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-header">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="inputPassword4">Ürün Görsel</label>
+                            <input type="file" name="imagePath" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Ürün Ad</label>
+                            @*<input type="text" class="form-control" id="inputEmail4" placeholder="Ad Girin">*@
+                            @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control", placeholder = "Ürün Ad Girin" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Ürün Stok</label>
+                            @Html.TextBoxFor(x => x.UnitsInStock, new { @class = "form-control", type = "datetime", placeholder = "Ürün Stok Girin" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">EvimiKur Ürün Fiyat</label>
+                            @Html.TextBoxFor(x => x.UnitPrice, new { @class = "form-control", placeholder = "Ürün Fiyatı Girin" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Tedarikçi Firma Fiyat</label>
+                            @Html.TextBoxFor(x => x.SupplierUnitPrice, new { @class = "form-control", type = "datetime", placeholder = "Ürün Açıklama Girin" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Ürün Açıklama</label>
+                            @Html.TextBoxFor(x => x.Description, new { @class = "form-control", type = "datetime", placeholder = "Ürün Açıklama Girin" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Kategori Girin</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Kategori Seçin</option>
+                                @foreach (var item in ViewBag.SubCategory as List<MODEL.Entities.SubCategory>)
+                                {
+                                    <option value="@item.ID">@item.SubCategoryName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputState">Tedarikçi Girin</label>
+                            <select id="inputState" class="form-control">
+                                <option selected>Tedarikçi Seçin</option>
+                                @foreach (var item in ViewBag.Supplier as List<MODEL.Entities.Supplier>)
+                                {
+                                    <option value="@item.ID">@item.CompanyName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

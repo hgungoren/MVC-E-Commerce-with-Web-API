@@ -1,0 +1,99 @@
+﻿@model MODEL.Entities.AppUser
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login | E-Shopper</title>
+    <link href="~/Content/theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/theme/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/theme/css/price-range.css" rel="stylesheet">
+    <link href="~/Content/theme/css/animate.css" rel="stylesheet">
+    <link href="~/Content/theme/css/main.css" rel="stylesheet">
+    <link href="~/Content/theme/css/responsive.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="~/Content/theme/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/theme/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/theme/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/theme/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/theme/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+
+<body>
+
+
+    @*<div class="row" style="margin-top:50px; margin-left:100px;">
+            <div class="col">
+                <form method="post">
+                    <div class="form-group">
+                        @Html.ValidationMessageFor(x => x.UserName)
+                        <label>Kullanıcı Adı</label>
+                        <input type="text" class="form-control" name="UserName" />
+
+                    </div>
+                    <div class="form-group">
+                        @Html.ValidationMessageFor(x => x.Password)
+                        <label>Şifre</label>
+                        <input type="password" class="form-control" name="Password" />
+                    </div>
+                    <input type="submit" value="Giriş Yap" />
+                </form>
+            </div>
+        </div>*@
+
+
+
+
+
+
+
+    <section id="form">
+
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-dark" role="alert" id="success_message" style="background-color:whitesmoke">
+                    <h3 style="color:red"><b>@TempData["Basarisiz"]</b></h3>
+                </div>
+                
+                <div class="col-sm-4 col-sm-offset-1">
+
+                    <div class="login-form">
+
+                        <h2>Giriş yapınız. Üyeliğiniz yoksa lütfen kayıt olunuz.</h2>
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                        {
+
+                            @Html.ValidationMessageFor(x => x.UserName)
+                            <input type="text" placeholder="Username" name="UserName" />
+
+                            @Html.ValidationMessageFor(x => x.Password)
+                            <input type="password" placeholder="Password" name="Password" />
+                            <button type="submit" class="btn btn-default">Login</button>
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Content/theme/js/jquery.js"></script>
+    <script src="~/Content/theme/js/price-range.js"></script>
+    <script src="~/Content/theme/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/theme/js/bootstrap.min.js"></script>
+    <script src="~/Content/theme/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/theme/js/main.js"></script>
+</body>
+</html>
+

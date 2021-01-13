@@ -1,0 +1,63 @@
+﻿@model List<MODEL.Entities.SupplierProduct>
+@{
+    ViewBag.Title = "BuyProduct";
+    Layout = "~/Areas/SatınAlma/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Şirket Ad</th>
+                        <th>Şirket Yetkilisi</th>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Fiyatı</th>
+                        <th>Tedarikçi Stoğu</th>
+                        <th>Tedarik Etme Süresi(Gün)</th>
+                        <th>Email</th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CompanyName</td>
+                        <td>@item.ContactName</td>
+                        <td>@item.OtherProductName</td>
+                        <td>@item.ProductPrice</td>
+                        <td>@item.SupplierStock</td>
+                        <td>@item.DeliverTimeInDays</td>
+                        <td>@item.Email</td>
+                        <td>
+                            
+                                @*<button formmethod="post" type="submit" class="btn btn-sm btn-warning" id="@item.ID" name="">Güncelle</button>*@
+                                @Html.ActionLink("MailGönder", "SendMailRequest", new { id = item.ID }, new { @class = "btn btn-success text-center" })
+                            
+                        </td>
+
+
+                    </tr>
+                }
+
+               
+
+
+
+
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+

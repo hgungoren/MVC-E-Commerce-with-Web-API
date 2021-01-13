@@ -1,0 +1,50 @@
+﻿@model List<MODEL.Entities.Contact>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Halklaİliskiler/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+
+        </div>
+        <!--Çalışanlar burada dönüyor.-->
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>İsim</th>
+                            <th>Konu</th>
+                            <th>Şikayet Mesajı</th>
+                            <th>E-Mail</th>
+                            <th>Şikayet Tarihi</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Subject</td>
+                            <td>@item.Message</td>
+                            <td>@item.Email</td>
+                            <td>@item.Date</td>
+                            <td>
+                                @Html.ActionLink("Reply", "Reply", new { id = item.ID }, new { @class = "btn btn-success" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

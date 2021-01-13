@@ -1,0 +1,35 @@
+﻿@model IEnumerable<COMMON.DovizKuruModel>
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Döviz Kurları</h1>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <td>Birim</td>
+                <td>İsim</td>
+                <td>Kod</td>
+                <td>Alış Fiyatı</td>
+                <td>Satış Fiyatı</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (COMMON.DovizKuruModel kur in Model)
+                {
+                    <tr>
+                        <td>@kur.Unit</td>
+                        <td>@kur.Isim</td>
+                        <td>@kur.CurrencyCode</td>
+                        <td>@kur.ForexBuying</td>
+                        <td>@kur.ForexSelling</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

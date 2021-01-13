@@ -1,0 +1,65 @@
+﻿@model List<MODEL.Entities.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    TempData["Title"] = "Anasayfa";
+}
+
+<hr />
+
+<main>
+    <div class="container-fluid">
+        @*<h1 class="mt-4">Finans Departmanı</h1>*@
+        <!--Personel Sayısı-->
+        @Html.Action("_PartialDashboard")
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+            </div>
+            <!--Çalışanlar burada dönüyor.-->
+            <div class="card-body">
+                <div class="table-responsive">
+                    @Html.ActionLink("Personel Yeni Kayıt", "AddEmployee", "Home", null, new { @class = "" })
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Görsel</th>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>İşe Giriş Tarihi</th>
+                                <th>Telefon Numarası</th>
+                                <th>Adres</th>
+                                <th>Hakediş İzin</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> <img src="~/Content/user-image/@item.ImagePath" width="50" height="50" /> </td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.HireDate</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.Adress</td>
+                                <td>@item.Permisson</td>
+                                <td>
+                                    @Html.ActionLink("Güncelle", "UpdateEmployee", new { id = item.ID }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("Sil", "DeleteEmployee", new { id = item.ID }, new { @class = "btn btn-danger" })
+
+                                </td>
+                            </tr>
+
+                        }
+
+                    </table>
+
+                    <a href="http://e.sgk.gov.tr/">Personel SGK Kayıt Sayfası</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>

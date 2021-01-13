@@ -1,0 +1,63 @@
+﻿@model MODEL.Entities.Supplier
+@{
+    ViewBag.Title = "SupplierPayments";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            <form role="form" method="post" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card-header">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEmail4">Kontak Ad</label>
+                                        @*<input type="text" class="form-control" id="inputEmail4" placeholder="Ad Girin">*@
+                                        @Html.TextBoxFor(x => x.ContactName, new { @class = "form-control", placeholder = "Kontak Ad" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputPassword4">Şirket Ad</label>
+                                        @Html.TextBoxFor(x => x.CompanyName, new { @class = "form-control", placeholder = "Şirket Ad" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputPassword4">Adres</label>
+                                        @Html.TextBoxFor(x => x.Adress, new { @class = "form-control", placeholder = "Adres" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputPassword4">IBAN No</label>
+                                        @Html.TextBoxFor(x => x.IbanNo, new { @class = "form-control", placeholder = "TR320010009999901234567890" })
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inputPassword4">Ödeme Girin</label>
+                                        @Html.TextBoxFor(x => x.SupplierPayment, new { @class = "form-control", placeholder = "5000₺" })
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+
+                                        @*<label for="inputPassword4">Banka Girin</label>
+                                              @Html.DropDownListFor(model => model.ID, new SelectList(ViewBag.Banks as List<MODEL.Entities.Bank>, "ID", "BankName"), new
+                                                {
+                                                    @class = "form-control",
+                                            data_placeholder = "Please select a supplier"
+                                                })*@
+
+
+                                        <hr />
+                                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

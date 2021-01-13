@@ -1,0 +1,58 @@
+﻿@model List<MODEL.Entities.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+
+        </div>
+        <!--Çalışanlar burada dönüyor.-->
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    @Html.ActionLink("Yeni Ürün Kayıt", "AddProduct", "Product", null, new { @class = "" })
+                    <thead>
+                        <tr>
+                            <th>Ürün Görsel</th>
+                            <th>Ürün Adı</th>
+                            <th>Ürün Stok</th>
+                            <th>EvimKur Ürün Fiyatı</th>
+                            <th>Ürün AltKategori</th>
+                            <th>Tedarikçi Bilgisi</th>
+                            <th>Tedarikçi Ürün Fiyatı</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+
+
+                        <tr>
+                            <td>@item.ImagePath</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.UnitsInStock</td>
+                            <td>@item.UnitPrice.ToString("C2")</td>
+                            <td>@item.SubCategory.SubCategoryName</td>
+                            <td>@item.Supplier.CompanyName</td>
+                            <td>@item.SupplierUnitPrice.ToString()</td>
+                            <td>
+                                @Html.ActionLink("Güncelle", "UpdateProduct", "Product", new { id = item.ID }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Sil", "DeleteProduct", "Product", new { id = item.ID }, new { @class = "btn btn-danger" })
+                            </td>
+
+                        </tr>
+                    }
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

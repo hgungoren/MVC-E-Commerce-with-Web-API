@@ -1,0 +1,108 @@
+﻿@model MODEL.Entities.SenderMessage
+@{
+    ViewBag.Title = "Reply";
+    Layout = "~/Areas/Halklaİliskiler/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <form role="form" method="post" enctype="multipart/form-data">
+        <div id="contact-page" class="container">
+            <div class="bg">
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="contact-form">
+                            <h2 class="title text-center">Get In Touch</h2>
+                            <div class="status alert alert-success" style="display: none"></div>
+                            @using (Html.BeginForm("Reply", "Product", FormMethod.Post, new { @class = "well form-horizontal" }))
+                            {
+                                <fieldset>
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @*<form id="main-contact-form" class="contact-form row" name="contact-form" method="post">*@
+                                    <div class="form-group">
+                                        @*<div class="input-group col-md-6">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+
+                                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Adınız" })
+
+                                            </div>*@
+
+                                    </div>
+                                    <div class="form-group" @*value="@Model.Email"*@>
+                                        <div class="input-group col-md-6">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+
+                                            @Html.TextBoxFor(x => x.Email, new
+                                            {
+                                                @class = "form-control",
+                                                placeholder = "Email"
+                                            })
+                                        </div>
+
+                                    </div>
+                                    @*<div class="form-group">
+                                            <div class="input-group col-md-12">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+
+                                                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", placeholder = "Konu" })
+                                            </div>
+
+                                        </div>*@
+                                    <div class="form-group">
+                                        <div class="input-group col-md-12">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+
+                                            @Html.TextBoxFor(x => x.Message, new { @class = "form-control", placeholder = "Mesajınız..." })
+                                        </div>
+
+                                    </div>
+
+                                    @if (TempData["Basarili"] != null)
+                                    {
+                                        <div class="alert alert-success" role="alert" id="success_message">
+                                            Gönderildi<i class="glyphicon glyphicon-thumbs-up"></i>@TempData["Basarili"]
+                                        </div>
+                                    }
+
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label"></label>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-warning">Gönder <span class="glyphicon glyphicon-send"></span></button>
+
+                                        </div>
+                                    </div>
+                                    @*</form>*@
+                                </fieldset>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

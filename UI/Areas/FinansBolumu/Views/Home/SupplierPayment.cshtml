@@ -1,0 +1,42 @@
+﻿@model List<MODEL.Entities.Supplier>
+@{
+    ViewBag.Title = "SupplierPayment";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<form>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Kontak Adı</th>
+                        <th>Şirket Adı</th>
+                        <th>Adres</th>
+                        <th>Telefon No</th>
+                        <th>IBAN No</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ContactName</td>
+                        <td>@item.CompanyName</td>
+                        <td>@item.Adress</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@item.IbanNo</td>
+                        <td> @Html.ActionLink("Bilgileri Getir", "SupplierPay", "Home", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</form>
+
+

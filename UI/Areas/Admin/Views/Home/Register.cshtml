@@ -1,0 +1,153 @@
+﻿@model MODEL.Entities.AppUser
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            /*background-color: black;*/
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Add padding to containers */
+        .container {
+            padding: 16px;
+            background-color: white;
+        }
+
+        /* Full-width input fields */
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: #ddd;
+                outline: none;
+            }
+
+        /* Overwrite default styles of hr */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* Set a style for the submit button */
+        .registerbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .registerbtn:hover {
+                opacity: 1;
+            }
+
+        /* Add a blue text color to links */
+        a {
+            color: dodgerblue;
+        }
+
+        /* Set a grey background color and center the text of the "sign in" section */
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                <h2 style="color:red"><span>@TempData["Error"]</span></h2>
+            </div>
+        }
+    </div>
+
+    
+
+
+    <form role="form" method="post" enctype="multipart/form-data">
+
+
+        <div class="container">
+            <div class="form-group">
+                @Html.ActionLink("Listeye Geri Dön", "Indexx", null, new { @class = "btn btn-warning btn btn-round" })
+            </div>
+            <h1>Kayıt Ol</h1>
+            <p>Bir hesap oluşturmak için lütfen bu formu doldurun.</p>
+            <hr>
+
+            <label for="email"><b>Kullanıcı Adı</b></label>
+            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "kullanıcı adı" })
+            @*<input type="text" placeholder="Enter Email" name="email" id="email" required>*@
+
+            <label for="psw"><b>Ad</b></label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "ad" })
+            @*<input type="password" placeholder="Enter Password" name="psw" id="psw" required>*@
+
+            <label for="psw-repeat"><b>Parola</b></label>
+            @Html.TextBoxFor(x => x.Password, new { @class = "form-control", placeholder = "şifre" })
+            @*<input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>*@
+
+            <label for="psw-repeat"><b>Soyad</b></label>
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "Soyad" })
+
+            <label for="psw-repeat"><b>Rol</b></label>
+            @Html.TextBoxFor(x => x.Role, new { @class = "form-control", placeholder = "Lütfen Kayıt Olacağınız Departmanın Numarasını Giriniz.. (Admin=1, KayıtlıÜye=2, SatınAlma=5, İnsanKaynakları=7, Finans=8, Halklaİlişkiler=9)" })
+
+            <label for="psw-repeat"><b>E-mail</b></label>
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
+
+            <label for="psw-repeat"><b>Doğum Tarihi</b></label>
+            <br />
+            @Html.TextBoxFor(x => x.BirthDate, new { @class = "form-control", @type = "date" })
+            <br />
+            <br />
+            <label for="psw-repeat"><b>Telefon No.</b></label>
+            @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", placeholder = "Telefon" })
+
+            <label for="psw-repeat"><b>Cinsiyet</b></label>
+            @Html.TextBoxFor(x => x.Gender, new { @class = "form-control", placeholder = "cinsiyet" })
+
+            <label for="psw-repeat"><b>Adres</b></label>
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control", placeholder = "adres" })
+
+            <div class="form-group">
+                <input type="file" name="imagePath" />
+            </div>
+            <hr>
+            @*<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>*@
+
+            <button type="submit" class="registerbtn">Kaydet</button>
+            @*<button type="submit" class="btn btn-primary btn-lg btn-block">Kaydet</button>*@
+        </div>
+
+        <div class="container signin">
+            <p>Zaten hesabınız var mı? <a href="@Url.Action("Login","Home",new {Area=""})">Oturum açın</a>.</p>
+        </div>
+    </form>
+
+</body>
+</html>
+

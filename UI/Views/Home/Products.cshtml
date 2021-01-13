@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class=" row">
+        <div class="col-sm-3">
+            <div class="left-sidebar">
+                <h2>Category</h2>
+                <div class="panel-group category-products" id="accordian">
+                    <!--category-productsr-->
+
+
+                    @foreach (var item in ViewBag.Categories as List<MODEL.Entities.Category>)
+                    {
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <a data-toggle="collapse" href="#@item.">
+                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                    <span>
+                                        <a href="@Url.Action("ProductsByCategory",new { id=item.ID})" class="list-group-item">@item.CategoryName</a>
+                                        @*@item.CategoryName*@
+                                    </span>
+                                </a>
+
+                            </div>
+                        </div>
+                        foreach (var s in ViewBag.SubCategories as List<MODEL.Entities.SubCategory>)
+                        {
+                            if (item.ID == s.CategoryId)
+                            {
+                                <div class="panel panel-default">
+                                    <div id="@s.CategoryId" class="panel-collapse collapse ">
+                                        <div class="panel-body">
+
+                                            <ul>
+                                                <li>
+                                                    @s.SubCategoryName
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+                    }
+
+                </div><!--/category-products-->
+
+
+            </div>
+        </div>
+        <div class="col-sm-9 padding-right">
+            <div class="features_items">
+                <!--features_items-->
+                <h2 class="title text-center">Features Items</h2>
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-4">
+                        <div class="product-image-wrapper">
+
+                            <div class="productinfo text-center">
+                                <a href="@Url.Action("ProductDetail","Home",new {id=item.ID })">
+                                    <img src="~/Content/image/@item.ImagePath" alt="" width="350" height="400" />
+                                </a>
+                               
+                                <a href="@Url.Action("ProductDetail","Home",new {id=item.ID })">
+                                    <h2>@item.UnitPrice</h2>
+                                </a>
+                                
+                                <p                                 
+                                   >
+                                    @item.ProductName
+                                </p>
+                                @Html.ActionLink("Sepete ekle", "AddToCart", new { id = item.ID }, new { @class = "btn btn-primary text-center" })
+                                @*<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>*@
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                }
+
+            </div><!--features_items-->
+
+            <div class="category-tab">
+                <!--category-tab-->
+
+
+
+            </div><!--/category-tab-->
+        </div>
+    </div>
+
+</div>
+
+
+

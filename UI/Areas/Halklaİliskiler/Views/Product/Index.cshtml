@@ -1,0 +1,62 @@
+﻿@model List<MODEL.Entities.DefectiveProduct>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Halklaİliskiler/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+
+        </div>
+        <!--Çalışanlar burada dönüyor.-->
+        <div class="card-body">
+            <div class="table-responsive">
+                @*@Html.ActionLink("Kusurlu Ürün Yeni Kayıt", "AddProduct", "Product", null, new { @class = "" })*@
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            @*<th>Resim</th>*@
+                            <th>Ürün Adı</th>
+                            <th>Müşteri Ad/Soyad</th>
+                            <th>Email</th>
+                            <th>Telefon No.</th>
+                            <th>Iban No.</th>
+                            <th>Tarih</th>
+                            <th>Kusurlu Ürün Açıklaması</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            @*<td>@item.ImagePath</td>*@
+                            <td>@item.ProductId</td>
+                            <td>@item.NameSurname</td>
+                            <td>@item.Email</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.IbanNo</td>
+                            <td>@item.Date</td>
+                            <td>@item.Description</td>
+
+
+
+                            <td>
+                                @Html.ActionLink("Reply", "Reply", new { id = item.ID }, new { @class = "btn btn-success" })
+                                @*<a class="btn btn-sm btn-dark text-white" href="@Url.Action("Reply","Product")/@item.ID"> <i>reply</i></a>*@
+
+                                
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

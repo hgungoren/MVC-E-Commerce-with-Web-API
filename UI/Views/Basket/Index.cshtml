@@ -1,0 +1,227 @@
+﻿@model UI.Models.Basket.CartItem
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var basket = Session["Basket"] as UI.Models.Basket.CartItem;
+
+    decimal? totalPrice = 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | E-Shopper</title>
+    <link href="~/Content/theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/theme/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/theme/css/prettyPhoto.css" rel="stylesheet">
+    <link href="~/Content/theme/css/price-range.css" rel="stylesheet">
+    <link href="~/Content/theme/css/animate.css" rel="stylesheet">
+    <link href="~/Content/theme/css/main.css" rel="stylesheet">
+    <link href="~/Content/theme/css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="~/Content/theme/js/html5shiv.js"></script>
+    <script src="~/Content/theme/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="~/Content/theme/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/theme/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/theme/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/theme/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/theme/images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+    <!--/header-->
+
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="~/Content/theme/#">Home</a></li>
+                    <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="price">Price</td>
+                            <td class="quantity">Quantity</td>
+                            <td class="total">Total</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var cart in basket.MyBasket)
+                        {
+
+                            <tr>
+                                <td class="cart_product">
+                                    <a><img src="~/Content/image/@cart.ImagePath" alt="" width="100" height="70"></a>
+                                </td>
+                                <td class="cart_description">
+                                    <h4><a href="#">@cart.ProductName</a></h4>
+                                    <p>@cart.ID</p>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@cart.Price</p>
+                                </td>
+                                <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <div class="cart_quantity_button">
+
+                                        <input type="text" class="cart_quantity_up" id="product-count" value="@cart.Quantity" @*autocomplete="off"*@ size="4">
+
+                                        <button class="btn btn-sm btn-warning cart-update" id="@cart.ID" name="">Güncelle</button>
+
+                                    </div>
+                                </td>
+
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@cart.SubTotal.ToString("C")</p>
+                                </td>
+
+                                <td class="col-sm-1 col-md-1">
+                                    @Html.ActionLink("DeleteCart", "DeleteCart", new { id = cart.ID }, new { @class = "btn btn-danger text-center" });
+                                </td>
+
+                            </tr>
+                            totalPrice += cart.SubTotal;
+
+
+                            <tr class="float-right" style="background-color:gainsboro">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="cart_price"><h3><strong>Total:</strong></h3></td>
+                                <td class="text-right float-right"><h3><strong>@totalPrice.Value.ToString("C")</strong></h3></td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("Index","Payment")">
+                                        <span type="submit">Checkout</span>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    <section id="do_action">
+    </section><!--/#do_action-->
+    <!--/Footer-->
+    @*@Html.ActionLink("Checkout", "Index", "Home", new { id = cart.ID }, new { @class = "btn btn-danger text-center" });*@
+
+    <script src="~/Content/theme/js/jquery.js"></script>
+    <script src="~/Content/theme/js/bootstrap.min.js"></script>
+    <script src="~/Content/theme/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/theme/js/jquery.prettyPhoto.js"></script>
+    <script src="~/Content/theme/js/main.js"></script>
+
+    @section scripts{
+        <script>
+
+            $(document).ready(function () {
+
+                $(".cart-update").click(function () {
+                    var count = $("#product-count").val();
+                    var productId = $(this).attr('id');
+                    alert(productId);
+                    var updateCart = {
+                        Quantity: count,
+                        Id: productId
+                    };
+                    $.ajax({
+                        type: 'Post',
+                        data: updateCart,
+                        url: '/Basket/UpdateCart/',
+                        success: function (data) {
+                            location.reload(true);
+                        }
+                    })
+                })
+            })
+        </script>
+    }
+    @section scp{
+        <script>
+            $(document).ready(function () {
+                $("cart-delete").click(function () {
+                    var uId = $(this).attr("name");
+                    $.ajax({
+                        type: "GET",
+                        url: "/Basket/DeleteCart/",
+                        data: { id: uId },
+                        success: function myfunction() {
+                            alert("success")
+                        },
+                        error: function myfunction() {
+                            alert("error");
+                        }
+                    });
+                });
+            });
+
+
+
+
+        </script>
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<script>
+            $(document).ready(function myfunction() {
+                $(".urunSil").click(function UrunSil() {
+                    var uId = $(this).attr("name");
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Basket/SepetUrunAdetDusur",
+                        data: { id: uId },
+                        success: function myfunction() {
+
+                            $.ajax({
+                                type: "GET",
+                                url: "/Basket/Index",
+                                success: function myfunction(veri) {
+                                    $(".cart-all").html('');
+                                    $(".cart-all").html(veri);
+                                }
+                            });
+                        },
+                        error: function myfunction() {
+
+                        }
+                    });
+                });
+            });
+        </script>*@
+
+
+</body>
+</html>

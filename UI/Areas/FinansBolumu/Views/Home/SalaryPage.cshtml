@@ -1,0 +1,51 @@
+﻿@model List<MODEL.Entities.Employee>
+@{
+    ViewBag.Title = "SalaryPage";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<form>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Ünvan</th>
+                        <th>Maaş</th>
+                        <th>Hakediş İzin</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Title</td>
+                        <td>@item.Salary.ToString("C2")</td>
+                        <td>@item.Permisson</td>
+                        <td> @Html.ActionLink("Bilgileri Getir", "Payment", new { id = item.ID }, new { @class = "btn btn-warning" })</td>
+
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+
+</form>
+<script>
+    function degergoster() {
+        var selectkutu = document.getElementById('selectPersonel');
+        var selectkutu_value = selectkutu.options[selectkutu.selectedIndex].value;
+        var selectkutu_text = selectkutu.options[selectkutu.selectedIndex].text;
+        alert("Personel Adı Soyadı :" + selectkutu_text + '\n' + "Personel Maaşı :" + selectkutu_value);
+    }
+</script>
+

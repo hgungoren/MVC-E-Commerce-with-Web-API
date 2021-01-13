@@ -1,0 +1,55 @@
+﻿@model List<MODEL.Entities.Supplier>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/FinansBolumu/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+
+        </div>
+        <!--Çalışanlar burada dönüyor.-->
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    @Html.ActionLink("Yeni Tedarik Kayıt", "AddSupplier", "Supplier", null, new { @class = "" })
+                    <thead>
+                        <tr>
+                            <th>Kontak Adı</th>
+                            <th>Şirket Adı</th>
+                            <th>Adres</th>
+                            <th>Telefon No</th>
+                            <th>IBAN No</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.ContactName</td>
+                            <td>@item.CompanyName</td>
+                            <td>@item.Adress</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.IbanNo</td>
+                            <th>
+                                @Html.ActionLink("Güncelle", "UpdateSupplier", "Supplier", new { id = item.ID }, new { @class = "btn btn-warning" })
+                                @Html.ActionLink("Sil", "DeleteSupplier", "Supplier", new { id = item.ID }, new { @class = "btn btn-danger" })
+
+                            </th>
+
+                        </tr>
+                    }
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

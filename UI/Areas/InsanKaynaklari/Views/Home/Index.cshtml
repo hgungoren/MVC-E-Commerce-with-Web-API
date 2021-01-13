@@ -1,0 +1,112 @@
+﻿@model List<MODEL.Entities.Employee>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/InsanKaynaklari/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">İnsan Kaynakları Departmanı</h1>
+        <!--<div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Toplam Ürün</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">@ViewBag.ProductCount</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>-->
+        <!--Stok Durumu-->
+        <!--<div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">Personel Sayısı</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">@ViewBag.SellerCount</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>-->
+        <!--Toplam Satış-->
+        <!--<div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">Tedarikçi Sayısı</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">@ViewBag.SupplierCount</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>-->
+        <!--Toplam İade-->
+        <!--</div>-->
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    @Html.ActionLink("Çalışan Ekle", "AddEmployee", "Home", null, new { @class = "" })
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>TCKN.</th>
+                                <th>İsim</th>
+                                <th>Soyisim</th>
+                                <th>Çalıştığı Bölge</th>
+                                <th>Ünvan</th>
+                                <th>Doğum Tarihi</th>
+                                <th>İşe Alım Tarihi</th>
+                                <th>Telefon No</th>
+                                <th>Adres</th>
+                                <th>Iban</th>
+                                <th>Eğitim Durumu</th>
+                                <th>Sertifika1</th>
+                                <th>Sertifika2</th>
+
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.TCKN </td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                @foreach (var a in ViewBag.Seller as List<MODEL.Entities.Seller>)
+                                {
+                                    if (item.SellerId == a.ID)
+                                    {
+                                        <td>@a.District</td>
+                                    }
+
+                                }
+
+                                <td>@item.Title</td>
+                                <td>@item.BirthDate</td>
+                                <td>@item.HireDate</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.Adress</td>
+                                <td>@item.IbanNo</td>
+                                <td>@item.EducationStatus</td>
+                                <td>@item.Certificate1</td>
+                                <td>@item.Certificate2</td>
+
+                                <td>
+                                    @Html.ActionLink("Güncelle", "UpdateEmployee", new { id = item.ID }, new { @class = "btn btn-warning" })
+                                    @Html.ActionLink("Sil", "DeleteEmployee", new { id = item.ID }, new { @class = "btn btn-danger" })
+
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+

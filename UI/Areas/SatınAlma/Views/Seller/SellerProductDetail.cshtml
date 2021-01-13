@@ -1,0 +1,58 @@
+﻿@model List<MODEL.Entities.Seller>
+@{
+    ViewBag.Title = "SellerProductDetail";
+    Layout = "~/Areas/SatınAlma/Views/Shared/_Layout.cshtml";
+}
+
+<form>
+</form>
+<div class="card-body">
+    <div class="table-responsive">
+
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Bayi Bölge</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Adet</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tr>
+                @foreach (var item in Model)
+                {
+                    <td>@item.District</td>
+
+
+                    <td>
+                        @foreach (var r in ViewBag.SellerProducts as List<MODEL.Entities.SellerProduct>)
+                        {
+                            <li>@r.ProductName</li>
+                        }
+                    </td>
+
+                    <td>
+                        @foreach (var r in ViewBag.SellerProducts as List<MODEL.Entities.SellerProduct>)
+                        {
+                            <li>@r.Quantity</li>
+                        }
+                    </td>
+
+
+                }
+
+
+
+                @*<td>
+                        @Html.ActionLink("Güncelle", "UpdateEmployee", new { id = item.ID }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Sil", "DeleteEmployee", new { id = item.ID }, new { @class = "btn btn-danger" })
+
+                    </td>*@
+            </tr>
+
+        </table>
+    </div>
+</div>
+
